@@ -1,0 +1,39 @@
+server:
+  port : 8081
+sftp:
+  destination: uatvfs01
+  port: 22
+  username: svc.plusuat_api
+  password: mKa730rpu@0pxF
+springdoc:
+  api-docs:
+    path: /api-docs
+spring:
+  main:
+    lazy-initialization: true
+  datasource:
+    url: "jdbc:sqlserver://kayu.life:443;encrypt=true;trustServerCertificate=true;databaseName=master"
+    username: sa
+    password: 1234Qwer
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  jpa:
+    hibernate:
+      naming:
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyJpaCompliantImpl
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.SQLServer2012Dialect
+scheduler:
+  brokerListApiUrl: https://dev-plus-core-api.apps.ocpuat.interconnect.systems/v1/broker/list-page
+  brokerListSchedule: "0 0 21 1/1 * ?"
+  policyAssignmentListApiUrl: https://dev-plus-core-api.apps.ocpuat.interconnect.systems/v1/broker/policy-assignment
+  policyAssignmentListSchedule: "0 0 21 1/1 * ?"
+  campaignBirthdayDelightListApiUrl: https://dev-plus-core-api.apps.ocpuat.interconnect.systems/v1/campaign/original-detail/list
+  campaignBirthdayDelightListSchedule: "0 0 21 1/1 * ?"
+log:
+  logUrl: https://dev-plus-log-api.apps.ocpuat.interconnect.systems/v1/log
+  applicationName: partner-plus-api
