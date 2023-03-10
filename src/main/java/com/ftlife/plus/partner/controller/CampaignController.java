@@ -13,6 +13,7 @@ import com.ftlife.plus.partner.util.HttpUtil;
 import com.ftlife.plus.partner.util.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.text.ParseException;
 
 @RestController
+@CrossOrigin(origins = {"http://172.29.3.60:3000/", "http://localhost:3000/"})
 public class CampaignController {
     @Autowired
     LogConfig logConfig;
