@@ -1,10 +1,10 @@
-FROM maven:3.6.3-jdk-11
+FROM eclipse-temurin:latest
+WORKDIR /app
 
-RUN useradd -ms /bin/bash ftlife
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:go-offline
 
-COPY ./agent-0.0.1.jar /home/ftlife/agent-0.0.1.jar
-RUN chown -R ftlife:ftlife /home/ftlife/agent-0.0.1.jar
+COPY src ./src
 
-USER ftlife
-WORKDIR /home/ftlife
-ENTRYPOINT ["java","-Xmx512M", "-jar", "agent-0.0.1.jar"]
+CMD ["./mvnw", "spring-boot:run"]
