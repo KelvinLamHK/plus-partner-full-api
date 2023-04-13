@@ -12,7 +12,7 @@ spring:
   main:
     lazy-initialization: true
   datasource:
-    url: "jdbc:sqlserver://kayu.life:1443;databaseName=master"
+    url: "jdbc:sqlserver://kayu.life:443;trustServerCertificate=true;databaseName=master"
     username: sa
     password: 1234Qwer
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver

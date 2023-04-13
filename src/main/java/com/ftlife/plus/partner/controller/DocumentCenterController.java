@@ -24,7 +24,7 @@ import java.text.ParseException;
 
 @RestController
 @Log4j2
-@CrossOrigin(origins = {"http://172.29.3.60:3000/", "http://localhost:3000/"})
+@CrossOrigin(origins = {"http://172.29.3.60:3000/", "http://localhost:3000/","http://172.29.9.104:3000"})
 public class DocumentCenterController {
 
     @Autowired
