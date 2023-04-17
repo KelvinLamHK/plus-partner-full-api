@@ -1,29 +1,18 @@
 package com.ftlife.plus.partner.service;
 
-import com.ftlife.plus.partner.configuration.SFTPConfig;
-import com.ftlife.plus.partner.dto.DocumentDto;
 import com.ftlife.plus.partner.entity.TDocumentEntity;
 import com.ftlife.plus.partner.parameter.*;
 import com.ftlife.plus.partner.repository.TDocumentRepository;
-import com.ftlife.plus.partner.util.SftpUtil;
-import com.jcraft.jsch.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class DocumentServiceImplTest {

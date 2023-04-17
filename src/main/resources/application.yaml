@@ -1,10 +1,11 @@
 server:
   port : 8081
-sftp:
-  destination: uatvfs01
-  port: 22
-  username: svc.plusuat_api
-  password: mKa730rpu@0pxF
+smb:
+  hostname: hqvfs01
+  shareName: SHARE
+  domain: your_domain
+  username: tat.kyl
+  password: 1234Qwer
 springdoc:
   api-docs:
     path: /api-docs

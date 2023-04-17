@@ -9,13 +9,14 @@ import org.springframework.stereotype.Component;
 
 @Configuration
 @EnableConfigurationProperties
-@ConfigurationProperties(prefix = "sftp")
+@ConfigurationProperties(prefix = "smb")
 @Getter
 @Setter
 @Component
-public class SFTPConfig {
-    private String destination;
-    private String port;
+public class SMBConfig {
+    private String hostname;
+    private String shareName;
+    private String domain;
     private String username;
     private String password;
 }

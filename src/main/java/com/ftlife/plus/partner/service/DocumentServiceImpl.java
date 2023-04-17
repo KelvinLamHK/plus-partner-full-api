@@ -1,13 +1,12 @@
 package com.ftlife.plus.partner.service;
 
-import com.ftlife.plus.partner.configuration.SFTPConfig;
+import com.ftlife.plus.partner.configuration.SMBConfig;
 import com.ftlife.plus.partner.dto.DocumentDto;
 import com.ftlife.plus.partner.entity.TDocumentEntity;
 import com.ftlife.plus.partner.parameter.RequestParameter;
 import com.ftlife.plus.partner.repository.TDocumentRepository;
-import com.ftlife.plus.partner.util.SftpUtil;
-import com.jcraft.jsch.JSchException;
-import com.jcraft.jsch.SftpException;
+import com.ftlife.plus.partner.util.SmbUtil;
+import com.hierynomus.smbj.share.DiskShare;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,17 +17,20 @@ import java.text.ParseException;
 public class DocumentServiceImpl implements DocumentService {
 
     @Autowired
-    SFTPConfig sftpConfig;
+    SMBConfig smbConfig;
 
     @Autowired
     private TDocumentRepository tDocumentRepository;
 
     @Override
-    public long uploadFile(RequestParameter requestParameter) throws JSchException, SftpException, ParseException {
-        SftpUtil sftpUtil = new SftpUtil();
-        String filePathString = requestParameter.getDocumentParameter().getDocumentCategory()+"/" + System.currentTimeMillis() + "/" ;
+    public long uploadFile(RequestParameter requestParameter) throws ParseException {
+        String filePathString = requestParameter.getDocumentParameter().getDocumentCategory()+"/" + System.currentTimeMillis() +"/";
         String fileFullPathString = filePathString + requestParameter.getDocumentParameter().getDocumentName();
-        sftpUtil.uploadDocument(sftpConfig,requestParameter.getDocumentParameter().getBase64FileString(),fileFullPathString);
+        try (DiskShare diskShare = SmbUtil.getDiskShare(smbConfig)) {
+            SmbUtil.uploadDocument(diskShare, requestParameter.getDocumentParameter().getBase64FileString(), fileFullPathString);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
 
         TDocumentEntity tDocumentEntity = new TDocumentEntity(requestParameter, filePathString);
 
@@ -42,18 +44,21 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public DocumentDto downloadDocument(RequestParameter requestParameter) throws JSchException, SftpException, IOException {
-        SftpUtil sftpUtil = new SftpUtil();
+    public DocumentDto downloadDocument(RequestParameter requestParameter) throws IOException {
+        String documentBase64String;
         TDocumentEntity tDocumentEntity = tDocumentRepository.findById(Long.parseLong(requestParameter.getDocumentParameter().getDocumentId())).orElse(null);
         String documentFullPath = null;
-        String documentBase64String = null;
 
         if (tDocumentEntity != null) {
             documentFullPath = tDocumentEntity.getSourcePath() + tDocumentEntity.getDocumentName();
-            documentBase64String = sftpUtil.downloadDocument(sftpConfig,documentFullPath);
+            try (DiskShare diskShare = SmbUtil.getDiskShare(smbConfig)) {
+                documentBase64String = SmbUtil.downloadDocument(diskShare, documentFullPath);
+            }
+        } else {
+            documentBase64String = null;
         }
 
-        return new DocumentDto(tDocumentEntity,documentBase64String);
+        return new DocumentDto(tDocumentEntity, documentBase64String);
     }
 
 }
