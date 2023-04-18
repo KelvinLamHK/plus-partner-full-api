@@ -14,8 +14,9 @@ import org.springframework.stereotype.Component;
 @Setter
 @Component
 public class SMBConfig {
-    private String hostname;
-    private String shareName;
+    private String host;
+    private String share;
+    private String path;
     private String domain;
     private String username;
     private String password;

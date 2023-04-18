@@ -26,12 +26,13 @@ public class SmbUtil {
         SmbConfig smbConfiguration = SmbConfig.builder().build();
         SMBClient smbClient = new SMBClient(smbConfiguration);
 
-        Connection connection = smbClient.connect(smbConfig.getHostname());
+        Connection connection = smbClient.connect(smbConfig.getHost());
         AuthenticationContext authenticationContext = new AuthenticationContext(smbConfig.getUsername(), smbConfig.getPassword().toCharArray(), smbConfig.getDomain());
         Session session = connection.authenticate(authenticationContext);
 
-        return (DiskShare) session.connectShare(smbConfig.getShareName());
+        return (DiskShare) session.connectShare(smbConfig.getShare());
     }
+
 
     public static void uploadDocument(DiskShare diskShare, String base64FileString, String fileFullPathString) throws IOException {
         createFolders(diskShare, fileFullPathString);

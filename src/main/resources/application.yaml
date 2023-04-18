@@ -1,9 +1,9 @@
 server:
   port : 8081
 smb:
-  hostname: hqvfs01
-  shareName: SHARE
-  domain: your_domain
+  host: uatvfs01
+  share: Apps
+  path: Partnerplus
   username: tat.kyl
   password: 1234Qwer
 springdoc:
