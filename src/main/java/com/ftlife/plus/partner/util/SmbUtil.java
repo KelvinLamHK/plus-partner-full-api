@@ -3,6 +3,7 @@ package com.ftlife.plus.partner.util;
 import com.ftlife.plus.partner.configuration.SMBConfig;
 import com.hierynomus.msdtyp.AccessMask;
 import com.hierynomus.mssmb2.SMB2CreateDisposition;
+import com.hierynomus.mssmb2.SMB2Dialect;
 import com.hierynomus.mssmb2.SMB2ShareAccess;
 import com.hierynomus.smbj.SMBClient;
 import com.hierynomus.smbj.SmbConfig;
@@ -35,7 +36,7 @@ public class SmbUtil {
 
 
     public static void uploadDocument(DiskShare diskShare, String base64FileString, String fileFullPathString) throws IOException {
-        createFolders(diskShare, fileFullPathString);
+        createFolders(diskShare, "/Partnerplus/"+fileFullPathString);
 
         byte[] fileBytes = Base64.getDecoder().decode(base64FileString);
         try (InputStream inputStream = new ByteArrayInputStream(fileBytes);
@@ -59,7 +60,7 @@ public class SmbUtil {
     }
 
     public static String downloadDocument(DiskShare diskShare, String documentFullPath) throws IOException {
-        try (File remoteFile = diskShare.openFile(documentFullPath, EnumSet.of(AccessMask.GENERIC_READ), null, SMB2ShareAccess.ALL, SMB2CreateDisposition.FILE_OPEN, null);
+        try (File remoteFile = diskShare.openFile("/Partnerplus/"+documentFullPath, EnumSet.of(AccessMask.GENERIC_READ), null, SMB2ShareAccess.ALL, SMB2CreateDisposition.FILE_OPEN, null);
              ByteArrayOutputStream outputStream = new ByteArrayOutputStream()) {
             IOUtils.copy(remoteFile.getInputStream(), outputStream);
             byte[] fileBytes = outputStream.toByteArray();

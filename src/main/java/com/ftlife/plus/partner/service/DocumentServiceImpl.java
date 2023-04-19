@@ -50,7 +50,7 @@ public class DocumentServiceImpl implements DocumentService {
         String documentFullPath = null;
 
         if (tDocumentEntity != null) {
-            documentFullPath = tDocumentEntity.getSourcePath() + tDocumentEntity.getDocumentName();
+            documentFullPath = tDocumentEntity.getSourcePath() + "/"+tDocumentEntity.getDocumentName();
             try (DiskShare diskShare = SmbUtil.getDiskShare(smbConfig)) {
                 documentBase64String = SmbUtil.downloadDocument(diskShare, documentFullPath);
             }

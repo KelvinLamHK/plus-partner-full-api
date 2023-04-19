@@ -16,4 +16,5 @@ public class RequestParameter {
     DocumentCenterParameter documentCenterParameter;
     CampaignDetailListParameter campaignDetailListParameter;
     DocumentCenterCategoryParameter documentCenterCategoryParameter;
+    LinkParameter linkParameter;
 }
