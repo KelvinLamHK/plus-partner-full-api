@@ -24,7 +24,9 @@ public class CmsController {
             cmsService.deleteLink(requestParameter.getLinkParameter().getLinkId());
         }else{
             LinkParameter linkParameter = new LinkParameter();
-            linkParameter.setLinkId(requestParameter.getLinkParameter().getLinkId());
+            if(!requestParameter.getLinkParameter().getStatus().equals("new")){
+                linkParameter.setLinkId(requestParameter.getLinkParameter().getLinkId());
+            }
             linkParameter.setStatus(requestParameter.getLinkParameter().getStatus());
             linkParameter.setUrl(requestParameter.getLinkParameter().getUrl());
             linkParameter.setLinkEngName(requestParameter.getLinkParameter().getLinkEngName());
