@@ -11,4 +11,10 @@ public interface CmsService {
     long createOrUpdateLink (LinkParameter linkParameter);
 
     List<TQuickLinkEntity> getAllLinks();
+
+    void deleteCommunication (long linkId);
+
+    long createOrUpdateCommunication (LinkParameter linkParameter);
+
+    List<TQuickLinkEntity> getAllCommunications();
 }

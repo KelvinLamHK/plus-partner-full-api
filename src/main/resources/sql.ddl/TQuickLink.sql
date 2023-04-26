@@ -4,6 +4,7 @@ CREATE TABLE TQuickLink (
     linkChiName VARCHAR(500) ,
     linkSimName VARCHAR(500),
     url VARCHAR(2000),
+    latestUpdate DATETIME,
 	CONSTRAINT  PKTQuickLink PRIMARY KEY CLUSTERED (linkId)
 );
 

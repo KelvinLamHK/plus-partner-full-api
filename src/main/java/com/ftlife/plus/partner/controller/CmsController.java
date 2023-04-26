@@ -43,4 +43,9 @@ public class CmsController {
 
         return ResponseEntity.ok().body( cmsService.getAllLinks());
     }
+
+    @PostMapping(value = "/cms/communication")
+    public ResponseEntity<Object> saveOrUpdateOrDeleteCommunication(){
+        return ResponseEntity.ok().body( "123");
+    }
 }
